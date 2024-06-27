@@ -1,40 +1,48 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./RadioInput.css";
 
-export default function RadioInput() {
-  const [selectedPower, setSelectedPower] = useState("huey");
+export default function RadioInput({preset, setPreset}) {
 
-  const handleChange = (e) => {
-    setSelectedPower(e.target.value);
-  };
-``
   return (
-    <form className="flex flex-col">
+    <div className="flex flex-col">
       <label className="text-[13px] mb-[10px]">Presets</label>
-      <div className="flex flex-row items-center gap-2">
-        <button ></button>
-        <label>5x 11kw</label>
+      <div className="flex flex-row gap-5">
+        <div className="flex flex-row items-center gap-2">
+          <button
+            className={`w-[20px] h-[20px] rounded-full ${
+              preset === "one" ? "bg-green-400" : "border-[1.5px] border-black"
+            }  flex justify-center items-center`}
+            onClick={() => setPreset("one")}
+          >
+            <div className="w-[7px] h-[7px] rounded-full bg-white"></div>
+          </button>
+          <label>5x 11kw</label>
+        </div>
+        <div className="flex flex-row items-center gap-2">
+          <button
+            className={`w-[20px] h-[20px] rounded-full ${
+              preset === "two" ? "bg-green-400" : "border-[1.5px] border-black"
+            }  flex justify-center items-center`}
+            onClick={() => setPreset("two")}
+          >
+            <div className="w-[7px] h-[7px] rounded-full bg-white"></div>
+          </button>
+          <label>3x 22kw</label>
+        </div>
+        <div className="flex flex-row items-center gap-2">
+          <button
+            className={`w-[20px] h-[20px] rounded-full ${
+              preset === "three"
+                ? "bg-green-400"
+                : "border-[1.5px] border-black"
+            }  flex justify-center items-center`}
+            onClick={() => setPreset("three")}
+          >
+            <div className="w-[7px] h-[7px] rounded-full bg-white"></div>
+          </button>
+          <label>1x 50kw</label>
+        </div>
       </div>
-      <div className="flex flex-row items-center gap-2">
-        <input
-          type="radio"
-          name="power"
-          value="mat"
-          checked={selectedPower === "mat"}
-          onChange={handleChange}
-        />
-        <label>3x 22kw</label>
-      </div>
-      <div className="flex flex-row items-center gap-2">
-        <input
-          type="radio"
-          name="power"
-          value="alex"
-          checked={selectedPower === "alex"}
-          onChange={handleChange}
-        />
-        <label>1x 50kw</label>
-      </div>
-    </form>
+    </div>
   );
 }

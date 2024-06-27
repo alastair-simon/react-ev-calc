@@ -10,7 +10,10 @@ type propstype = {
 
 export default function Slider({ max, value, setValue }: propstype) {
   return (
-    <div className="App">
+    <div>
+      <h4 className="text-[34px]">
+        {value} <span className="text-[16px]">kWh</span>
+      </h4>
       <input
         type="range"
         min="0"
@@ -19,6 +22,9 @@ export default function Slider({ max, value, setValue }: propstype) {
         style={getBackgroundSize(max, value)}
         value={value}
       />
+      <div className="flex flex-row justify-between text-[13px]">
+        <p>0 kWh</p> <p>{max} kWh</p>
+      </div>
     </div>
   );
 }

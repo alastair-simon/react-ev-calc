@@ -1,10 +1,10 @@
 input[type="range"] {
     width: 100%;
     -webkit-appearance: none;
-    height: 3px;
+    height: 2px;
     background: grey;
     border-radius: 0px;
-    background-image: linear-gradient(#d46a6a, #d46a6a);
+    background-image: linear-gradient(greenyellow, greenyellow);
     background-repeat: no-repeat;
 }
 
@@ -13,9 +13,9 @@ input[type="range"]::-webkit-slider-thumb {
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    background: #d46a6a;
+    background: greenyellow;
     cursor: pointer;
-    box-shadow: 0 0 2px 0 #555;
+    /* box-shadow: 0 0 2px 0 #555; */
     transition: background 0.3s ease-in-out;
 }
 
