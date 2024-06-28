@@ -17,3 +17,6 @@
 -   [React.js](https://reactjs.org/): A popular JS library for building user interfaces
 -   [Typescript.js](https://www.typescriptlang.org/): TypeScript extends JavaScript by adding types to the language.
 -   [Tailwind css](https://tailwindcss.com/): A utility-first CSS framework packed with classes
+
+## Deployment
+https://react-ev-calc.netlify.app/
