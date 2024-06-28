@@ -25,7 +25,7 @@ export function useNumInput(
       newValue = value;
     }
     setInputValue(newValue);
-    setValue(Math.max(newValue, min)); // Ensure value is not below min
+    setValue(Math.max(newValue, min)); 
   };
 
   // Increment the number
