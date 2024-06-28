@@ -1,23 +1,19 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRandomChargingDemand } from "./useRandomChargingDemand";
 
-const arrivalProbabilities: number[] = [
-  0.94, 0.94, 0.94, 0.94, 0.94, 0.94, 0.94, 0.94, 2.83, 2.83, 5.66, 5.66, 5.66,
-  7.55, 7.55, 7.55, 10.38, 10.38, 10.38, 4.72, 4.72, 4.72, 0.94, 0.94,
-];
-
 interface SimulationResult {
   totalEnergyConsumed: number;
   maxPowerDemand: number;
   concurrencyFactor: number;
   chargingEvents: number;
+  theoreticalMaxPowerDemand: number;
 }
 
 function useChargingSimulation(
   consumption: number,
   chargingPower: number,
   chargePoints: number,
-  multiplier: number
+  probability: number
 ): SimulationResult {
   const { getRandomChargingDemand } = useRandomChargingDemand();
 
@@ -25,12 +21,13 @@ function useChargingSimulation(
   const hoursPerDay = 24;
   const totalIntervals = 35040; // 365 days * 24 hours * 4 intervals per hour
 
-  const [totalEnergyConsumed, setTotalEnergyConsumed] = useState<number>(0.00);
+  const [totalEnergyConsumed, setTotalEnergyConsumed] = useState<number>(0.0);
   const [maxPowerDemand, setMaxPowerDemand] = useState<number>(0);
   const [concurrencyFactor, setConcurrencyFactor] = useState<number>(0);
   const [chargingEvents, setChargingEvents] = useState<number>(0);
+  const[theoreticalMaxPowerDemand, setTheorecticalPowerDemand]= useState<number>(0)
 
-  const simulateCharge = useCallback((): void => {
+  const simulateCharge = useCallback(() => {
     let totalEnergyConsumed = 0;
     let maxPowerDemand = 0;
     let chargingEvents = 0;
@@ -38,9 +35,7 @@ function useChargingSimulation(
     const chargepoints = new Array(chargePoints).fill(0);
 
     for (let interval = 0; interval < totalIntervals; interval++) {
-      const hour = Math.floor((interval / intervalsPerHour) % hoursPerDay);
-      const arrivalProbability = arrivalProbabilities[hour] / 100 / 4;
-      const arrivalProbabilityMultiplier = arrivalProbability * multiplier;
+      const arrivalProbability = probability / 1000 / 4;
       let intervalPowerDemand = 0;
 
       for (let i = 0; i < chargepoints.length; i++) {
@@ -49,10 +44,10 @@ function useChargingSimulation(
           chargepoints[i] -= energyThisInterval;
           totalEnergyConsumed += energyThisInterval;
           intervalPowerDemand += chargingPower;
-        } else if (Math.random() < arrivalProbabilityMultiplier) {
+        } else if (Math.random() < arrivalProbability) {
           const chargingDemand = getRandomChargingDemand();
           if (chargingDemand > 0) {
-            chargepoints[i] = (chargingDemand / 100) * consumption * multiplier;
+            chargepoints[i] = (chargingDemand / 100) * consumption;
             intervalPowerDemand += chargingPower;
             chargingEvents += 1;
           }
@@ -63,8 +58,9 @@ function useChargingSimulation(
     }
 
     const theoreticalMaxPowerDemand = chargePoints * chargingPower;
-    const concurrency = maxPowerDemand / theoreticalMaxPowerDemand * 100 || 0;
+    const concurrency = (maxPowerDemand / theoreticalMaxPowerDemand) * 100 || 0;
     setTotalEnergyConsumed(parseFloat(totalEnergyConsumed.toFixed(2)));
+    setTheorecticalPowerDemand(theoreticalMaxPowerDemand);
     setMaxPowerDemand(maxPowerDemand);
     setConcurrencyFactor(Math.round(concurrency));
     setChargingEvents(chargingEvents);
@@ -72,7 +68,7 @@ function useChargingSimulation(
     chargePoints,
     chargingPower,
     consumption,
-    multiplier,
+    probability,
     getRandomChargingDemand,
   ]);
 
@@ -82,6 +78,7 @@ function useChargingSimulation(
 
   return {
     totalEnergyConsumed,
+    theoreticalMaxPowerDemand,
     maxPowerDemand,
     concurrencyFactor,
     chargingEvents,

@@ -8,7 +8,7 @@ export default function Dash() {
   const [consumption, setConsumption] = useState(18);
   const [chargePointPower, setChargePointPower] = useState(11);
   const [chargePoints, setChargePoints] = useState(5);
-  const [multiplier, setMultiplier] = useState(1);
+  const [multiplier, setMultiplier] = useState(100);
 
   return (
     <div

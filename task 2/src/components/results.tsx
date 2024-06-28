@@ -12,7 +12,8 @@ export default function Results({ consumption, chargePointPower, chargePoints, m
     totalEnergyConsumed,
     maxPowerDemand,
     concurrencyFactor,
-    chargingEvents
+    chargingEvents,
+    theoreticalMaxPowerDemand,
   } = useChargingSimulation(
     consumption,
     chargePointPower,
@@ -25,7 +26,7 @@ export default function Results({ consumption, chargePointPower, chargePoints, m
       <div className="w-[570px] h-[420px] relative flex flex-col p-[70px] rounded-[25px] bg-white">
         <div>
           <p className="text-[22px]">Total energy charged</p>
-          <h3 className="text-[90px] mb-[30px] leading-[140px]">
+          <h3 className="text-[100px] mb-[30px] leading-[140px]">
             {getFormattedNum(totalEnergyConsumed)}{" "}
             <span className="text-3xl">kWh</span>
           </h3>
@@ -34,7 +35,7 @@ export default function Results({ consumption, chargePointPower, chargePoints, m
         <div className="flex flex-row gap-10">
           <div>
             <p className="text-[13px]">Max demand</p>
-            <h4 className="text-[20px]">{20 * 11} kW</h4>
+            <h4 className="text-[20px]">{theoreticalMaxPowerDemand} kW</h4>
           </div>
           <div>
             <p className="text-[13px]">Actual demand</p>

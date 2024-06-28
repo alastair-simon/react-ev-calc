@@ -31,7 +31,7 @@ export default function Input({
           <NumberInput value={chargePoints} setValue={setChargePoints} />
         </div>
         <div className="w-full mb-[40px] flex flex-col">
-          <label className="text-[13px] mb-4">Arrival multiplier</label>
+          <label className="text-[13px] mb-4">Arrival probability</label>
           <NumberInput value={multiplier} setValue={setMultiplier} />
         </div>
       </div>
