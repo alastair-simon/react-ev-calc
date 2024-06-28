@@ -9,8 +9,8 @@ interface props {
   setChargePointPower: React.Dispatch<SetStateAction<number>>;
   chargePoints: number;
   setChargePoints: React.Dispatch<SetStateAction<number>>;
-  multiplier: number;
-  setMultiplier: React.Dispatch<SetStateAction<number>>;
+  probability: number;
+  setProbability: React.Dispatch<SetStateAction<number>>;
 }
 
 export default function Input({
@@ -20,8 +20,8 @@ export default function Input({
   setChargePointPower,
   chargePoints,
   setChargePoints,
-  multiplier,
-  setMultiplier,
+  probability,
+  setProbability,
 }: props) {
   return (
     <div className="w-[460px] h-full flex flex-col">
@@ -32,7 +32,7 @@ export default function Input({
         </div>
         <div className="w-full mb-[40px] flex flex-col">
           <label className="text-[13px] mb-4">Arrival probability</label>
-          <NumberInput value={multiplier} setValue={setMultiplier} />
+          <NumberInput value={probability} setValue={setProbability} />
         </div>
       </div>
       <div className="w-full mb-[40px]">

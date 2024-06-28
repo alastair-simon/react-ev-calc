@@ -4,10 +4,10 @@ interface propsType {
   consumption: number;
   chargePointPower: number;
   chargePoints: number;
-  multiplier: number;
+  probability: number;
 }
 
-export default function Results({ consumption, chargePointPower, chargePoints, multiplier=1 }:propsType) {
+export default function Results({ consumption, chargePointPower, chargePoints, probability }:propsType) {
   const {
     totalEnergyConsumed,
     maxPowerDemand,
@@ -18,7 +18,7 @@ export default function Results({ consumption, chargePointPower, chargePoints, m
     consumption,
     chargePointPower,
     chargePoints,
-    multiplier
+    probability
   );
 
   return (

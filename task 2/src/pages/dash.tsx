@@ -8,7 +8,7 @@ export default function Dash() {
   const [consumption, setConsumption] = useState(18);
   const [chargePointPower, setChargePointPower] = useState(11);
   const [chargePoints, setChargePoints] = useState(5);
-  const [multiplier, setMultiplier] = useState(100);
+  const [probability, setProbability] = useState(100);
 
   return (
     <div
@@ -26,8 +26,8 @@ export default function Dash() {
           setChargePointPower={setChargePointPower}
           chargePoints={chargePoints}
           setChargePoints={setChargePoints}
-          multiplier={multiplier}
-          setMultiplier={setMultiplier}
+          probability={probability}
+          setProbability={setProbability}
         />
       </div>
       <div className="w-full h-full justify-center md:flex-grow relative md:pr-[120px] pb-[150px] flex md:justify-end md:items-end">
@@ -35,7 +35,7 @@ export default function Dash() {
           consumption={consumption}
           chargePointPower={chargePointPower}
           chargePoints={chargePoints}
-          multiplier={multiplier}
+          probability={probability}
         />
         <div className="w-full h-full absolute top-0 left-0 -z-10 overflow-hidden">
           <img
