@@ -1,6 +1,6 @@
 import { SetStateAction } from "react";
-import "./slider.css";
 import { getBackgroundSize } from "../../utils/getBackgroundSize";
+import "./slider.css";
 interface propstype {
     max: number;
     value: number;

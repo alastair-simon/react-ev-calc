@@ -1,11 +1,15 @@
 import "./NumberInput.css";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 import { useNumInput } from "../../hooks/useNumInput";
+import { SetStateAction } from "react";
 
+interface props {
+  value: number;
+  setValue: React.Dispatch<SetStateAction<number>>;
+}
 
-export default function NumberInput({ value, setValue }) {
-
-  const { handleInputChange, increment, decrement, inputValue } = useNumInput(value, setValue)
+export default function NumberInput({ value, setValue }:props) {
+  const { handleInputChange, increment, decrement, inputValue } = useNumInput(value, setValue);
 
   return (
     <div className="number-wrap">

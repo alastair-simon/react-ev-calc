@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import { SetStateAction } from "react";
 import { usePreset } from "../../hooks/usePreset";
 import "./RadioInput.css";
 interface propsType {
@@ -7,7 +7,6 @@ interface propsType {
 };
 
 export default function RadioInput({setChargePoints, setChargePointPower}:propsType) {
-
   const { preset, setCurPreset } = usePreset(setChargePoints, setChargePointPower);
 
   return (
