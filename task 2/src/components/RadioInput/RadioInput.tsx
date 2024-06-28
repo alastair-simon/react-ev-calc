@@ -11,7 +11,7 @@ export default function RadioInput({setChargePoints, setChargePointPower}:propsT
 
   return (
     <div className="flex flex-col">
-      <label className="text-[13px] mb-[10px]">Presets</label>
+      <label className="text-[13px] mb-[10px] font-semibold">Presets</label>
       <div className="flex flex-row gap-5">
         <div className="flex flex-row items-center gap-2">
           <button
@@ -38,9 +38,7 @@ export default function RadioInput({setChargePoints, setChargePointPower}:propsT
         <div className="flex flex-row items-center gap-2">
           <button
             className={`w-[20px] h-[20px] rounded-full ${
-              preset === 3
-                ? "bg-green-400"
-                : "border-[2px] border-midGrey"
+              preset === 3 ? "bg-green-400" : "border-[2px] border-midGrey"
             }  flex justify-center items-center`}
             onClick={() => setCurPreset(3)}
           >

@@ -27,20 +27,20 @@ export default function Input({
     <div className="w-[460px] h-full flex flex-col">
       <div className="flex flex-row gap-8">
         <div className="w-full mb-[40px] flex flex-col">
-          <label className="text-[13px] mb-4">Number chargepoints</label>
+          <label className="text-[13px] mb-4 font-semibold">Number chargepoints</label>
           <NumberInput max={20} min={1} value={chargePoints} setValue={setChargePoints} />
         </div>
         <div className="w-full mb-[40px] flex flex-col">
-          <label className="text-[13px] mb-4">Arrival probability</label>
+          <label className="text-[13px] mb-4 font-semibold">Arrival probability</label>
           <NumberInput max={100} min={1} value={probability} setValue={setProbability} />
         </div>
       </div>
       <div className="w-full mb-[40px]">
-        <label className="text-[13px] mb-[20px]">Car consumption</label>
+        <label className="text-[13px] mb-[20px] font-semibold">Car consumption</label>
         <Slider max={100} value={consumption} setValue={setConsumption} />
       </div>
       <div className="w-full mb-[40px]">
-        <label className="text-[13px]">Chargepoint power</label>
+        <label className="text-[13px] font-semibold">Chargepoint power</label>
         <Slider
           max={100}
           value={chargePointPower}

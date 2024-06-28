@@ -14,7 +14,7 @@ export default {
         yellowGreen: "#B9FF23",
       },
       fontFamily: {
-        myfont: ["PingFang", "sans-serif"],
+        myfont: ["Plus Jakarta Sans", "sans-serif"],
       },
     },
   },
