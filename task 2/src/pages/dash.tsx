@@ -5,10 +5,10 @@ import blurYellow from "../assets/blurYellow.svg"
 import blurGreen from "../assets/blurGreen.svg"
 
 export default function Dash() {
-  const [consumption, setConsumption] = useState(18);
-  const [chargePointPower, setChargePointPower] = useState(11);
-  const [chargePoints, setChargePoints] = useState(5);
-  const [probability, setProbability] = useState(100);
+  const [consumption, setConsumption] = useState<number>(18);
+  const [chargePointPower, setChargePointPower] = useState<number>(11);
+  const [chargePoints, setChargePoints] = useState<number>(5);
+  const [probability, setProbability] = useState<number>(100);
 
   return (
     <div

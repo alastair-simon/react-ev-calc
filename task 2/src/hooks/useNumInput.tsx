@@ -2,7 +2,7 @@ import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 type SetValueFunction = Dispatch<SetStateAction<number>>;
 
-export function useNumInput(value: number, setValue: SetValueFunction) {
+export function useNumInput(value: number, setValue: SetValueFunction, max:number) {
   const [inputValue, setInputValue] = useState<string>(String(value));
 
   useEffect(() => {
@@ -10,15 +10,24 @@ export function useNumInput(value: number, setValue: SetValueFunction) {
   }, [value]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
+    let newValue = e.target.value;
+
+    if (!isNaN(Number(newValue))) {
+      newValue = String(Math.min(Number(newValue), max));
+    } else {
+      newValue = String(value);
+    }
+
     setInputValue(newValue);
-    setValue(newValue === "" ? 0 : Number(newValue));
+    setValue(Number(newValue));
   };
 
   const increment = () => {
     const newValue = value + 1;
-    setInputValue(String(newValue));
-    setValue(newValue);
+    if (newValue <= max) {
+      setInputValue(String(newValue));
+      setValue(newValue);
+    }
   };
 
   const decrement = () => {

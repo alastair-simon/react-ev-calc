@@ -26,7 +26,7 @@ export default function Results({ consumption, chargePointPower, chargePoints, p
       <div className="w-[570px] h-[420px] relative flex flex-col p-[70px] rounded-[25px] bg-white">
         <div>
           <p className="text-[22px]">Total energy charged</p>
-          <h3 className="text-[100px] mb-[30px] leading-[140px]">
+          <h3 className="text-[90px] mb-[30px] leading-[140px]">
             {getFormattedNum(totalEnergyConsumed)}{" "}
             <span className="text-3xl">kWh</span>
           </h3>

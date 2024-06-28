@@ -16,7 +16,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: -13px;
+    margin: -10px;
 }
 
 .button-wrap button :hover {
@@ -29,9 +29,8 @@ input[type="number"] {
     height: 50px;
     font-size: 28px;
     padding-left: 15px;
-    background: #F2F2F2;
-    /* border: 1.5px solid #E2E2E2; */
-    border: 1.5px solid #ffffff00;
+    border: 2px solid #E2E2E2;
+    /* border: 1.5px solid #ffffff00; */
     border-radius: 10px;
     outline: none;
     -moz-appearance: textfield;
@@ -40,6 +39,11 @@ input[type="number"] {
     /* Chrome, Safari, Edge, Opera */
     appearance: textfield;
     /* Future-proof */
+}
+
+input::selection {
+    background-color: #E2E2E2;
+    color: #000;
 }
 
 input:focus {
