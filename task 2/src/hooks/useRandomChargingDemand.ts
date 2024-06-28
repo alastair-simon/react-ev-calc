@@ -17,11 +17,13 @@ const chargingDemandProbabilities: ChargingDemandProbability[] = [
   { demand: 300, probability: 2.94 },
 ];
 
+// Generates random demand from array
 export function useRandomChargingDemand () {
     const getRandomChargingDemand = useCallback((): number => {
       const rand = Math.random() * 100;
       let cumulative = 0;
 
+      // Loop through objects in array
       for (const i of chargingDemandProbabilities) {
       cumulative += i.probability;
           if (rand < cumulative) {
