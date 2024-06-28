@@ -1,8 +1,12 @@
+// EV charging simulator
+
+// Probability (%) of an EV arriving per interval (adjusted for intervals per hour)
 const arrivalProbabilities = [
   0.94, 0.94, 0.94, 0.94, 0.94, 0.94, 0.94, 0.94, 2.83, 2.83, 5.66, 5.66, 5.66,
   7.55, 7.55, 7.55, 10.38, 10.38, 10.38, 4.72, 4.72, 4.72, 0.94, 0.94,
 ];
 
+// Probability distribution of EV charging demands
 const chargingDemandProbabilities = [
   { demand: 0, probability: 34.31 },
   { demand: 5, probability: 4.9 },
@@ -15,6 +19,7 @@ const chargingDemandProbabilities = [
   { demand: 300, probability: 2.94 },
 ];
 
+// Configuration constants
 const numChargePoints = 20;
 const chargingPower = 11;
 const intervalsPerHour = 4;
@@ -22,73 +27,70 @@ const hoursPerDay = 24;
 const totalIntervals = 35040;
 const kwhPer100 = 18;
 
-//helper to get random demand
+// Helper function: Get a random charging demand based on defined probabilities
 function getRandomChargingDemand() {
   const rand = Math.random() * 100;
   let cumulative = 0;
 
-  for (const i of chargingDemandProbabilities) {
-    cumulative += i.probability;
+  for (const demand of chargingDemandProbabilities) {
+    cumulative += demand.probability;
     if (rand < cumulative) {
-      return i.demand;
+      return demand.demand;
     }
   }
   return 0;
 }
 
-// simulateCharge total
+// Returns total energy consumed and max power demand
 function simulateCharge() {
   let totalEnergyConsumed = 0;
   let maxPowerDemand = 0;
 
+  // Array to track remaining charge at each charge point
   const chargepoints = new Array(numChargePoints).fill(0);
 
-  //loop through intervals
+  // Loop through each interval
   for (let interval = 0; interval < totalIntervals; interval++) {
-    const hour = Math.floor((interval / intervalsPerHour) % hoursPerDay); // get hour from interval
+    const hour = Math.floor((interval / intervalsPerHour) % hoursPerDay); // Calculate hour from interval
 
-    const arrivalProbability = arrivalProbabilities[hour] / 100 / 4; // Adjust for the number of intervals per hour.
+    // Probability of an EV arriving in this interval (adjusted)
+    const arrivalProbability =
+      arrivalProbabilities[hour] / 100 / intervalsPerHour;
 
     let intervalPowerDemand = 0;
 
-    // Loop through each charge point (chargepoints array)
+    // Loop through each charge point
     for (let i = 0; i < chargepoints.length; i++) {
-
-      // Check if the chargepoint has remaining charge
+      // If the charge point has remaining charge
       if (chargepoints[i] > 0) {
-        // Calculate energy to be consumed in this interval
         const energyThisInterval = chargingPower / intervalsPerHour;
-        // Reduce the remaining charge of the chargepoint
-        chargepoints[i] -= energyThisInterval;
-        // Increase the total energy consumed
+        chargepoints[i] -= energyThisInterval; // Deduct energy used
         totalEnergyConsumed += energyThisInterval;
-        // Increase the interval power demand by the charging power
         intervalPowerDemand += chargingPower;
 
-        // If there is no remaining charge and a new arrival occurs based on arrival probability
+        // If no charge remains and an EV arrives based on arrival probability
       } else if (Math.random() < arrivalProbability) {
-        // Get a random charging demand for the new arrival
         const chargingDemand = getRandomChargingDemand();
         if (chargingDemand > 0) {
-          // Calculate the energy required for the charging demand
-          chargepoints[i] = (chargingDemand / 100) * kwhPer100;
-          // Increase the interval power demand by the charging power
+          chargepoints[i] = (chargingDemand / 100) * kwhPer100; 
           intervalPowerDemand += chargingPower;
         }
       }
-
     }
-    //keep track of highest power demand
     maxPowerDemand = Math.max(maxPowerDemand, intervalPowerDemand);
   }
 
   return { totalEnergyConsumed, maxPowerDemand };
 }
 
+// Run simulation
 const { totalEnergyConsumed, maxPowerDemand } = simulateCharge();
+
+// Calculate theoretical maximum power demand and concurrency factor
 const theoreticalMaxPowerDemand = numChargePoints * chargingPower;
 const concurrencyFactor = maxPowerDemand / theoreticalMaxPowerDemand;
 
+// Output results
 console.log(`Total energy consumed: ${totalEnergyConsumed.toFixed(2)} kWh`);
 console.log(`Theoretical maximum power demand: ${theoreticalMaxPowerDemand} kW`);
 console.log(`Actual maximum power demand: ${maxPowerDemand} kW`);

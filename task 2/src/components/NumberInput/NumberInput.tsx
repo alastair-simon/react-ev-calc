@@ -11,7 +11,7 @@ interface props {
 }
 
 export default function NumberInput({ value, setValue, max, min }:props) {
-  const { handleInputChange, increment, decrement, inputValue } = useNumInput(value, setValue, max);
+  const { handleInputChange, increment, decrement, inputValue } = useNumInput(value, setValue, max, min);
 
   return (
     <div className="number-wrap">

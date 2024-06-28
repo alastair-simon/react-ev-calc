@@ -1,3 +1,5 @@
+/* || Slider styles */
+
 input[type="range"] {
     width: 100%;
     -webkit-appearance: none;
@@ -15,7 +17,6 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 50%;
     background: #5EE85B;
     cursor: pointer;
-    /* box-shadow: 0 0 2px 0 #555; */
     transition: background 0.3s ease-in-out;
 }
 

@@ -18,7 +18,7 @@ function useChargingSimulation(
   const { getRandomChargingDemand } = useRandomChargingDemand();
 
   const intervalsPerHour = 4;
-  const hoursPerDay = 24;
+  //const hoursPerDay = 24;
   const totalIntervals = 35040; // 365 days * 24 hours * 4 intervals per hour
 
   const [totalEnergyConsumed, setTotalEnergyConsumed] = useState<number>(0.0);
@@ -32,12 +32,15 @@ function useChargingSimulation(
     let maxPowerDemand = 0;
     let chargingEvents = 0;
 
+    // Create new array with 0s in number chargepoints
     const chargepoints = new Array(chargePoints).fill(0);
 
+    // Loop through intervals
     for (let interval = 0; interval < totalIntervals; interval++) {
       const arrivalProbability = probability / 1000 / 4;
       let intervalPowerDemand = 0;
 
+      // Check if charge point has remaining power
       for (let i = 0; i < chargepoints.length; i++) {
         if (chargepoints[i] > 0) {
           const energyThisInterval = chargingPower / intervalsPerHour;
@@ -45,6 +48,7 @@ function useChargingSimulation(
           totalEnergyConsumed += energyThisInterval;
           intervalPowerDemand += chargingPower;
         } else if (Math.random() < arrivalProbability) {
+          //if a car arrives and there is no charge
           const chargingDemand = getRandomChargingDemand();
           if (chargingDemand > 0) {
             chargepoints[i] = (chargingDemand / 100) * consumption;
@@ -72,6 +76,7 @@ function useChargingSimulation(
     getRandomChargingDemand,
   ]);
 
+  //re run function if args change
   useEffect(() => {
     simulateCharge();
   }, [simulateCharge]);
