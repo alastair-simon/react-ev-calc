@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
+import { usePreset } from "../../hooks/usePreset";
 import "./RadioInput.css";
+interface propsType {
+  setChargePoints: React.Dispatch<SetStateAction<number>>;
+  setChargePointPower: React.Dispatch<SetStateAction<number>>;
+};
 
-export default function RadioInput({preset, setPreset}) {
+export default function RadioInput({setChargePoints, setChargePointPower}:propsType) {
+
+  const { preset, setCurPreset } = usePreset(setChargePoints, setChargePointPower);
 
   return (
     <div className="flex flex-col">
@@ -10,9 +17,9 @@ export default function RadioInput({preset, setPreset}) {
         <div className="flex flex-row items-center gap-2">
           <button
             className={`w-[20px] h-[20px] rounded-full ${
-              preset === "one" ? "bg-green-400" : "border-[1.5px] border-black"
+              preset === 1 ? "bg-green" : "border-[1.5px] border-midGrey"
             }  flex justify-center items-center`}
-            onClick={() => setPreset("one")}
+            onClick={() => setCurPreset(1)}
           >
             <div className="w-[7px] h-[7px] rounded-full bg-white"></div>
           </button>
@@ -21,9 +28,9 @@ export default function RadioInput({preset, setPreset}) {
         <div className="flex flex-row items-center gap-2">
           <button
             className={`w-[20px] h-[20px] rounded-full ${
-              preset === "two" ? "bg-green-400" : "border-[1.5px] border-black"
+              preset === 2 ? "bg-green" : "border-[2px] border-midGrey"
             }  flex justify-center items-center`}
-            onClick={() => setPreset("two")}
+            onClick={() => setCurPreset(2)}
           >
             <div className="w-[7px] h-[7px] rounded-full bg-white"></div>
           </button>
@@ -32,11 +39,11 @@ export default function RadioInput({preset, setPreset}) {
         <div className="flex flex-row items-center gap-2">
           <button
             className={`w-[20px] h-[20px] rounded-full ${
-              preset === "three"
+              preset === 3
                 ? "bg-green-400"
-                : "border-[1.5px] border-black"
+                : "border-[2px] border-midGrey"
             }  flex justify-center items-center`}
-            onClick={() => setPreset("three")}
+            onClick={() => setCurPreset(3)}
           >
             <div className="w-[7px] h-[7px] rounded-full bg-white"></div>
           </button>

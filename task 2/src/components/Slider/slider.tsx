@@ -1,8 +1,7 @@
-import { SetStateAction, useState } from "react";
+import { SetStateAction } from "react";
 import "./slider.css";
 import { getBackgroundSize } from "../../utils/getBackgroundSize";
-
-type propstype = {
+interface propstype {
     max: number;
     value: number;
     setValue: React.Dispatch<SetStateAction<number>>
@@ -11,7 +10,7 @@ type propstype = {
 export default function Slider({ max, value, setValue }: propstype) {
   return (
     <div>
-      <h4 className="text-[34px]">
+      <h4 className="text-[34px] ">
         {value} <span className="text-[16px]">kWh</span>
       </h4>
       <input
@@ -22,7 +21,7 @@ export default function Slider({ max, value, setValue }: propstype) {
         style={getBackgroundSize(max, value)}
         value={value}
       />
-      <div className="flex flex-row justify-between text-[13px]">
+      <div className="flex flex-row justify-between text-[13px] mt-3">
         <p>0 kWh</p> <p>{max} kWh</p>
       </div>
     </div>

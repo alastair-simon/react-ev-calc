@@ -1,37 +1,21 @@
 import "./NumberInput.css";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
-import { useState } from "react";
+import { useNumInput } from "../../hooks/useNumInput";
 
-export default function NumberInput({ chargePoints, setChargePoints }) {
-  const [inputValue, setInputValue] = useState(chargePoints);
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
-    setChargePoints(value === "" ? 0 : Number(value));
-  };
+export default function NumberInput({ value, setValue }) {
 
-  const increment = () => {
-    const newValue = chargePoints + 1;
-    setInputValue(newValue);
-    setChargePoints(newValue);
-  };
-
-  const decrement = () => {
-    const newValue = chargePoints - 1;
-    setInputValue(newValue);
-    setChargePoints(newValue);
-  };
+  const { handleInputChange, increment, decrement, inputValue } = useNumInput(value, setValue)
 
   return (
     <div className="number-wrap">
       <input type="number" value={inputValue} onChange={handleInputChange} />
       <div className="button-wrap">
         <button onClick={increment}>
-          <MdKeyboardArrowUp size={26} color="grey" />
+          <MdKeyboardArrowUp size={26} color="black" className="arrow" />
         </button>
         <button onClick={decrement}>
-          <MdKeyboardArrowDown size={26} color="grey" />
+          <MdKeyboardArrowDown size={26} color="black" className="arrow" />
         </button>
       </div>
     </div>

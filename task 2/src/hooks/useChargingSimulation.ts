@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRandomChargingDemand } from "./useRandomChargingDemand";
 
 const arrivalProbabilities: number[] = [
@@ -7,36 +7,40 @@ const arrivalProbabilities: number[] = [
 ];
 
 interface SimulationResult {
-  totalEnergyConsumed: string;
+  totalEnergyConsumed: number;
   maxPowerDemand: number;
-  concurrencyFactor: string;
+  concurrencyFactor: number;
+  chargingEvents: number;
 }
 
-interface propsType {
-  numChargePoints:number;
-  chargingPower:number;
-  intervalsPerHour:number;
-  kwhPer100:number;
-}
+function useChargingSimulation(
+  consumption: number,
+  chargingPower: number,
+  chargePoints: number,
+  multiplier: number
+): SimulationResult {
+  const { getRandomChargingDemand } = useRandomChargingDemand();
 
-function useChargingSimulation(numChargePoints, chargingPower, kwhPer100):propsType {
-    const intervalsPerHour = 4;
+  const intervalsPerHour = 4;
   const hoursPerDay = 24;
-  const totalIntervals = 35040;
-  const [totalEnergyConsumed, setTotalEnergyConsumed] = useState<number>(0);
+  const totalIntervals = 35040; // 365 days * 24 hours * 4 intervals per hour
+
+  const [totalEnergyConsumed, setTotalEnergyConsumed] = useState<number>(0.00);
   const [maxPowerDemand, setMaxPowerDemand] = useState<number>(0);
   const [concurrencyFactor, setConcurrencyFactor] = useState<number>(0);
-  const { getRandomChargingDemand } = useRandomChargingDemand();
+  const [chargingEvents, setChargingEvents] = useState<number>(0);
 
   const simulateCharge = useCallback((): void => {
     let totalEnergyConsumed = 0;
     let maxPowerDemand = 0;
+    let chargingEvents = 0;
 
-    const chargepoints = new Array<number>(numChargePoints).fill(0);
+    const chargepoints = new Array(chargePoints).fill(0);
 
     for (let interval = 0; interval < totalIntervals; interval++) {
       const hour = Math.floor((interval / intervalsPerHour) % hoursPerDay);
       const arrivalProbability = arrivalProbabilities[hour] / 100 / 4;
+      const arrivalProbabilityMultiplier = arrivalProbability * multiplier;
       let intervalPowerDemand = 0;
 
       for (let i = 0; i < chargepoints.length; i++) {
@@ -45,11 +49,12 @@ function useChargingSimulation(numChargePoints, chargingPower, kwhPer100):propsT
           chargepoints[i] -= energyThisInterval;
           totalEnergyConsumed += energyThisInterval;
           intervalPowerDemand += chargingPower;
-        } else if (Math.random() < arrivalProbability) {
+        } else if (Math.random() < arrivalProbabilityMultiplier) {
           const chargingDemand = getRandomChargingDemand();
           if (chargingDemand > 0) {
-            chargepoints[i] = (chargingDemand / 100) * kwhPer100;
+            chargepoints[i] = (chargingDemand / 100) * consumption * multiplier;
             intervalPowerDemand += chargingPower;
+            chargingEvents += 1;
           }
         }
       }
@@ -57,21 +62,30 @@ function useChargingSimulation(numChargePoints, chargingPower, kwhPer100):propsT
       maxPowerDemand = Math.max(maxPowerDemand, intervalPowerDemand);
     }
 
-    const theoreticalMaxPowerDemand = numChargePoints * chargingPower;
-    const concurrencyFactor = maxPowerDemand / theoreticalMaxPowerDemand;
-
-    setTotalEnergyConsumed(totalEnergyConsumed);
+    const theoreticalMaxPowerDemand = chargePoints * chargingPower;
+    const concurrency = maxPowerDemand / theoreticalMaxPowerDemand * 100 || 0;
+    setTotalEnergyConsumed(parseFloat(totalEnergyConsumed.toFixed(2)));
     setMaxPowerDemand(maxPowerDemand);
-    setConcurrencyFactor(concurrencyFactor);
-  }, [numChargePoints, chargingPower, intervalsPerHour, kwhPer100]);
+    setConcurrencyFactor(Math.round(concurrency));
+    setChargingEvents(chargingEvents);
+  }, [
+    chargePoints,
+    chargingPower,
+    consumption,
+    multiplier,
+    getRandomChargingDemand,
+  ]);
 
+  useEffect(() => {
     simulateCharge();
+  }, [simulateCharge]);
 
   return {
-    totalEnergyConsumed: totalEnergyConsumed.toFixed(2),
+    totalEnergyConsumed,
     maxPowerDemand,
-    concurrencyFactor: (concurrencyFactor * 100).toFixed(2),
+    concurrencyFactor,
+    chargingEvents,
   };
-};
+}
 
 export default useChargingSimulation;
