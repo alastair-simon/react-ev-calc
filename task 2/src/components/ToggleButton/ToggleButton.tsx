@@ -1,6 +1,5 @@
 import { SetStateAction } from "react";
-
-type TimePeriod = "day" | "month" | "year";
+import { TimePeriod } from "../../types/TimePeriod";
 
 interface Props {
   timePeriod: TimePeriod;

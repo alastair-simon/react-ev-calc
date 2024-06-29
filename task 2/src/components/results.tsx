@@ -1,16 +1,15 @@
 import { useState } from "react";
 import useChargingSimulation from "../hooks/useChargingSimulation";
+import { TimePeriod } from "../types/TimePeriod";
 import { getFormattedNum } from "../utils/getFromattedNum";
 import { ToggleButton } from "./ToggleButton/ToggleButton";
 import { ImPowerCord } from "react-icons/im";
-
 interface propsType {
   consumption: number;
   chargePointPower: number;
   chargePoints: number;
   probability: number;
 }
-type TimePeriod = "day" | "month" | "year";
 
 export default function Results({ consumption, chargePointPower, chargePoints, probability }: propsType) {
   const [timePeriod, setTimePeriod] = useState<TimePeriod>("year");
