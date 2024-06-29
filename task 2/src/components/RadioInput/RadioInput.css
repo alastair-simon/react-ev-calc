@@ -1,30 +1,14 @@
 input[type="radio"] {
-    /* Define the fill color (accent color) */
     accent-color: #53ff1a;
-    /* Adjust the color as needed */
     border-width: 10px;
-    /* Define the border color (stroke color) */
     border-color: #ffffff;
-    /* Adjust the color as needed */
-
-    /* Additional styling for appearance */
     width: 16px;
-    /* Example width */
     height: 16px;
-    /* Example height */
 }
 
 /* Style the radio input when it is checked (selected) */
 input[type="radio"]:checked {
-    /* Adjust the fill color when checked */
     background-color: #53ff1a;
-    /* Adjust the color as needed */
-
-    /* Adjust the border color when checked */
     border-color: #53ff1a;
-    /* Adjust the color as needed */
-
-    /* Additional styling for appearance when checked */
-    /* box-shadow: 0 0 0 2px #53ff1a inset; */
-    /* Example of a box-shadow for border effect */
+    box-shadow: 0 0 0 2px #53ff1a inset;
 }
