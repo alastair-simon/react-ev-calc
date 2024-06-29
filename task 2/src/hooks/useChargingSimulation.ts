@@ -13,20 +13,20 @@ function useChargingSimulation(
   consumption: number,
   chargingPower: number,
   chargePoints: number,
-  probability: number
+  probability: number,
+  timePeriod: "day" | "month" | "year"
 ): SimulationResult {
   const { getRandomChargingDemand } = useRandomChargingDemand();
 
   const intervalsPerHour = 4;
-  // const hoursPerDay = 24;
-  const totalIntervals = 35040; // 365 days * 24 hours * 4 intervals per hour
+  const intervals = { day: 96 , month: 2880, year: 35040 };
+  const totalIntervals = intervals[timePeriod];
 
   const [totalEnergyConsumed, setTotalEnergyConsumed] = useState<number>(0.0);
   const [maxPowerDemand, setMaxPowerDemand] = useState<number>(0);
   const [concurrencyFactor, setConcurrencyFactor] = useState<number>(0);
   const [chargingEvents, setChargingEvents] = useState<number>(0);
-  const [theoreticalMaxPowerDemand, setTheoreticalMaxPowerDemand] =
-    useState<number>(0);
+  const [theoreticalMaxPowerDemand, setTheoreticalMaxPowerDemand] = useState<number>(0);
 
   const simulateCharge = useCallback(() => {
     // Validate inputs
@@ -67,7 +67,6 @@ function useChargingSimulation(
           chargingEvents += 1;
         }
       }
-
       maxPowerDemand = Math.max(maxPowerDemand, intervalPowerDemand);
     }
 
@@ -86,6 +85,7 @@ function useChargingSimulation(
     consumption,
     probability,
     getRandomChargingDemand,
+    timePeriod
   ]);
 
   // Re-run function if args change
