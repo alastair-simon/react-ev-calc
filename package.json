@@ -1,0 +1,15 @@
+{
+  "name": "react-ev-calc",
+  "version": "1.0.0",
+  "description": "## About",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd task_2 && npm install",
+    "task1": "node ./task_1/final.js",
+    "task2": "cd task_2 && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

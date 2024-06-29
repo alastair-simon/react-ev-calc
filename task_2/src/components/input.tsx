@@ -28,11 +28,11 @@ export default function Input({
       <div className="flex flex-row gap-8">
         <div className="w-full mb-[40px] flex flex-col">
           <label className="text-[13px] mb-4 font-semibold">Number chargepoints</label>
-          <NumberInput max={20} min={1} value={chargePoints} setValue={setChargePoints} />
+          <NumberInput max={20} min={1} initialVal={5} value={chargePoints} setValue={setChargePoints} />
         </div>
         <div className="w-full mb-[40px] flex flex-col">
           <label className="text-[13px] mb-4 font-semibold">Arrival probability</label>
-          <NumberInput max={100} min={1} value={probability} setValue={setProbability} />
+          <NumberInput max={100} min={1} initialVal={100} value={probability} setValue={setProbability} />
         </div>
       </div>
       <div className="w-full mb-[40px]">
