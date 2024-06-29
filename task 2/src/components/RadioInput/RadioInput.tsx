@@ -22,7 +22,7 @@ export default function RadioInput({setChargePoints, setChargePointPower}:propsT
           >
             <div className="w-[7px] h-[7px] rounded-full bg-white"></div>
           </button>
-          <label>5x 11kw</label>
+          <label className="font-medium">5x 11kw</label>
         </div>
         <div className="flex flex-row items-center gap-2">
           <button
@@ -33,7 +33,7 @@ export default function RadioInput({setChargePoints, setChargePointPower}:propsT
           >
             <div className="w-[7px] h-[7px] rounded-full bg-white"></div>
           </button>
-          <label>3x 22kw</label>
+          <label className="font-medium">3x 22kw</label>
         </div>
         <div className="flex flex-row items-center gap-2">
           <button
@@ -44,7 +44,7 @@ export default function RadioInput({setChargePoints, setChargePointPower}:propsT
           >
             <div className="w-[7px] h-[7px] rounded-full bg-white"></div>
           </button>
-          <label>1x 50kw</label>
+          <label className="font-medium">1x 50kw</label>
         </div>
       </div>
     </div>

@@ -10,8 +10,8 @@ interface propstype {
 export default function Slider({ max, value, setValue }: propstype) {
   return (
     <div>
-      <h4 className="text-[34px] ">
-        {value} <span className="text-[16px]">kWh</span>
+      <h4 className="text-[34px] font-medium">
+        {value} <span className="text-[16px] font-medium">kWh</span>
       </h4>
       <input
         type="range"
@@ -22,7 +22,8 @@ export default function Slider({ max, value, setValue }: propstype) {
         value={value}
       />
       <div className="flex flex-row justify-between text-[13px] mt-3">
-        <p>0 kWh</p> <p>{max} kWh</p>
+        <p className="font-medium">0 kWh</p>{" "}
+        <p className="font-medium">{max} kWh</p>
       </div>
     </div>
   );
