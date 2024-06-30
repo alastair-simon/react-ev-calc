@@ -67,12 +67,11 @@ function simulateCharge() {
         chargepoints[i] -= energyThisInterval; // Deduct energy used
         totalEnergyConsumed += energyThisInterval;
         intervalPowerDemand += chargingPower;
-
         // If no charge remains and an EV arrives based on arrival probability
       } else if (Math.random() < arrivalProbability) {
         const chargingDemand = getRandomChargingDemand();
         if (chargingDemand > 0) {
-          chargepoints[i] = (chargingDemand / 100) * kwhPer100; 
+          chargepoints[i] = (chargingDemand / 100) * kwhPer100;
           intervalPowerDemand += chargingPower;
         }
       }
