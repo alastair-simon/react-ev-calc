@@ -10,6 +10,7 @@ export function useNumInput(
   initialVal: number
 ) {
   const [inputValue, setInputValue] = useState<string>(value.toString());
+  const [error, setError] = useState<boolean>(false);
 
   // Keep input in sync with value
   useEffect(() => {
@@ -25,7 +26,7 @@ export function useNumInput(
   // Handle enter
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      handleBlur(); // Call the handleBlur function on Enter key press
+      handleBlur();
     }
   };
 
@@ -39,35 +40,32 @@ export function useNumInput(
       inputValue === "0"
     ) {
       setInputValue(initialVal.toString());
+      setError(true);
       return;
     }
     if (numValue >= min && numValue <= max) {
       setValue(Number(inputValue));
+      setError(false);
     } else {
       setInputValue(initialVal.toString());
+      setError(true);
     }
   };
 
   // Increment the number
   const increment = () => {
-    const newValue = value + 1;
-    // Check value is not above max
-    if (newValue <= max) {
-      setInputValue(newValue.toString());
-      setValue(newValue);
-    }
+    const newValue = Math.min(value + 1, max);
+    setInputValue(newValue.toString());
+    setValue(newValue);
+    setError(newValue <= max);
   };
 
   // Decrement the number
   const decrement = () => {
-    const newValue = value - 1;
-    if (newValue >= min) {
-      setInputValue(newValue.toString());
-      setValue(newValue);
-    } else {
-      setInputValue(min.toString());
-      setValue(min);
-    }
+    const newValue = Math.max(value - 1, min);
+    setInputValue(newValue.toString());
+    setValue(newValue);
+    setError(false);
   };
 
   return {
@@ -77,5 +75,6 @@ export function useNumInput(
     inputValue,
     handleBlur,
     handleKeyDown,
+    error,
   };
 }
