@@ -24,27 +24,55 @@ export default function Input({
   setProbability,
 }: props) {
   return (
-    <div className="w-[460px] h-full flex flex-col">
-      <div className="flex flex-row gap-8">
-        <div className="w-full mb-[40px] flex flex-col">
-          <label className="text-[13px] mb-4 font-semibold">Number chargepoints</label>
-          <NumberInput max={20} min={1} initialVal={5} value={chargePoints} setValue={setChargePoints} />
+    <div className="md:w-full h-full flex flex-col">
+      <div className="mb-10 mt-10">
+        <h2 className="font-PingFang font-semibold text-3xl mb-2">
+          EV charge point calculator
+        </h2>
+        <p className="">Adjust the inputs to get an estimate</p>
+      </div>
+      <div className="w-full flex flex-col gap-5 md:flex-row md:gap-0 mb-12">
+        <div className="w-full flex flex-col">
+          <label className="text-sm mb-4 font-medium">
+            Number of charge points
+          </label>
+          <NumberInput
+            max={20}
+            min={1}
+            initialVal={5}
+            value={chargePoints}
+            setValue={setChargePoints}
+          />
         </div>
-        <div className="w-full mb-[40px] flex flex-col">
-          <label className="text-[13px] mb-4 font-semibold">Arrival probability</label>
-          <NumberInput max={100} min={1} initialVal={100} value={probability} setValue={setProbability} />
+        <div className="w-full flex flex-col">
+          <label className="text-sm mb-4 font-medium">
+            Arrival probability
+          </label>
+          <NumberInput
+            max={100}
+            min={1}
+            initialVal={100}
+            value={probability}
+            setValue={setProbability}
+          />
         </div>
       </div>
-      <div className="w-full mb-[40px]">
-        <label className="text-[13px] mb-[20px] font-semibold">Car consumption</label>
-        <Slider max={100} value={consumption} setValue={setConsumption} />
+      <div className="w-full mb-16">
+        <Slider
+          max={100}
+          value={consumption}
+          setValue={setConsumption}
+          unit={"kWh"}
+          label={"Car consumption"}
+        />
       </div>
-      <div className="w-full mb-[40px]">
-        <label className="text-[13px] font-semibold">Chargepoint power</label>
+      <div className="w-full mb-20">
         <Slider
           max={100}
           value={chargePointPower}
           setValue={setChargePointPower}
+          unit={"kW"}
+          label={"Chargepoint power"}
         />
       </div>
       <RadioInput

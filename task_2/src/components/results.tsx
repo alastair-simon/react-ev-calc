@@ -30,43 +30,37 @@ export default function Results({ consumption, chargePointPower, chargePoints, p
   const { currentValue } = useCountUpAnimation(totalEnergyConsumed, 800);
 
   return (
-    <div className="flex flex-col items-center z-99">
-      <div className="w-[570px] relative flex flex-col p-[70px] rounded-[25px] bg-white">
+      <div className="w-full flex flex-col justify-center relative pt-8 pb-14 mt-20 ml-24 rounded-3xl bg-white md:w-[570px] md:h-[430px] md:p-20">
         <div className="mb-4">
           <ToggleButton timePeriod={timePeriod} setTimePeriod={setTimePeriod} />
         </div>
-        <div className="mb-8">
-          <p className="text-[22px] mb-2 font-medium">Total energy charged</p>
-          <h3 className="w-full text-[85px] tracking-tighter font-medium leading-[100px] flex flex-row justify-between">
+        <div className="mb-9">
+          <p className="text-xl mb-3 font-medium">Total energy charged</p>
+          <h3 className="w-full text-6xl md:text-[85px] tracking-tighter font-medium leading-[80px] flex flex-row ">
             {getFormattedNum(currentValue)}{" "}
-            <span className="w-[40px] tracking-normal text-3xl self-end mb-2 mr-5">
+            <span className="tracking-normal text-3xl self-end mb-0 ml-5">
               kWh
             </span>
           </h3>
         </div>
-
         <div className="flex flex-row gap-10">
           <div>
-            <p className="text-[13px]">Max demand</p>
-            <h4 className="text-[20px] font-medium">
-              {theoreticalMaxPowerDemand} kW
-            </h4>
+            <p className="text-sm mb-1 font-bold">Max demand</p>
+            <h4 className="text-xl">{theoreticalMaxPowerDemand} kW</h4>
           </div>
           <div>
-            <p className="text-[13px]">Actual demand</p>
-            <h4 className="text-[20px] font-medium">{maxPowerDemand} kW</h4>
+            <p className="text-sm mb-1 font-bold">Actual demand</p>
+            <h4 className="text-xl">{maxPowerDemand} kW</h4>
           </div>
           <div>
-            <p className="text-[13px]">Concurrency factor</p>
-            <h4 className="text-[20px] font-medium">{concurrencyFactor}%</h4>
+            <p className="text-sm mb-1 font-bold">Concurrency factor</p>
+            <h4 className="text-xl">{concurrencyFactor}%</h4>
           </div>
         </div>
-
-        <div className="w-[220px] h-[68px] m-auto left-0 right-0 bottom-[-34px] flex flex-row gap-2 justify-center items-center rounded-[15px] bg-black absolute">
-          <p className="text-white text-[28px]">{chargingEvents}</p>
+        <div className="w-[220px] h-[68px] m-auto left-0 right-0 bottom-[-34px] flex flex-row gap-2 justify-center items-center rounded-xl bg-black absolute">
+          <p className="text-white text-3xl">{chargingEvents}</p>
           <ImPowerCord color="white" size={24} className="mt-0.5" />
         </div>
       </div>
-    </div>
   );
 }

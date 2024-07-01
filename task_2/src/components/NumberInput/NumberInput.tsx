@@ -1,6 +1,6 @@
 import "./NumberInput.css";
 import { SetStateAction } from "react";
-import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
+import { FaPlus, FaMinus } from "react-icons/fa6";
 import { useNumInput } from "../../hooks/useNumInput";
 
 interface props {
@@ -15,7 +15,10 @@ export default function NumberInput({ value, setValue, max, min, initialVal }:pr
   const { handleInputChange, increment, decrement, inputValue, handleBlur, handleKeyDown } = useNumInput(value, setValue, max, min, initialVal);
 
   return (
-    <div className="number-wrap">
+    <div className="number-input">
+      <button onClick={decrement}>
+        <FaMinus size={20} color="#AEAEAE" />
+      </button>
       <input
         type="number"
         min={min}
@@ -25,14 +28,9 @@ export default function NumberInput({ value, setValue, max, min, initialVal }:pr
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
       />
-      <div className="button-wrap">
-        <button onClick={increment}>
-          <MdKeyboardArrowUp size={26} color="#E2E2E2" className="arrow" />
-        </button>
-        <button onClick={decrement}>
-          <MdKeyboardArrowDown size={26} color="#E2E2E2" className="arrow" />
-        </button>
-      </div>
+      <button onClick={increment}>
+        <FaPlus size={20} color="#AEAEAE" />
+      </button>
     </div>
   );
 }

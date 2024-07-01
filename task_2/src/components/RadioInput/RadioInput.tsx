@@ -1,6 +1,5 @@
 import { SetStateAction } from "react";
 import { usePreset } from "../../hooks/usePreset";
-import "./RadioInput.css";
 interface propsType {
   setChargePoints: React.Dispatch<SetStateAction<number>>;
   setChargePointPower: React.Dispatch<SetStateAction<number>>;
@@ -11,38 +10,38 @@ export default function RadioInput({setChargePoints, setChargePointPower}:propsT
 
   return (
     <div className="flex flex-col">
-      <label className="text-[13px] mb-[10px] font-semibold">Presets</label>
+      <label className="text-sm mb-4 font-semibold">Presets</label>
       <div className="flex flex-row gap-5">
         <div className="flex flex-row items-center gap-2">
           <button
-            className={`w-[20px] h-[20px] rounded-full ${
-              preset === 1 ? "bg-green" : "border-[1.5px] border-midGrey"
+            className={`w-5 h-5 rounded-full ${
+              preset === 1 ? "bg-black" : "bg-lightGrey border-[1px] border-midGrey"
             }  flex justify-center items-center`}
             onClick={() => setCurPreset(1)}
           >
-            <div className="w-[7px] h-[7px] rounded-full bg-white"></div>
+            <div className="w-[6px] h-[6px] rounded-full bg-lightGrey"></div>
           </button>
           <label className="font-medium">5x 11kw</label>
         </div>
         <div className="flex flex-row items-center gap-2">
           <button
-            className={`w-[20px] h-[20px] rounded-full ${
-              preset === 2 ? "bg-green" : "border-[2px] border-midGrey"
+            className={`w-5 h-5 rounded-full ${
+              preset === 2 ? "bg-black" : "bg-lightGrey border-[1px] border-midGrey"
             }  flex justify-center items-center`}
             onClick={() => setCurPreset(2)}
           >
-            <div className="w-[7px] h-[7px] rounded-full bg-white"></div>
+            <div className="w-[6px] h-[6px] rounded-full bg-lightGrey"></div>
           </button>
           <label className="font-medium">3x 22kw</label>
         </div>
         <div className="flex flex-row items-center gap-2">
           <button
-            className={`w-[20px] h-[20px] rounded-full ${
-              preset === 3 ? "bg-green" : "border-[2px] border-midGrey"
+            className={`w-5 h-5 rounded-full ${
+              preset === 3 ? "bg-black" : "bg-lightGrey border-[1px] border-midGrey"
             }  flex justify-center items-center`}
             onClick={() => setCurPreset(3)}
           >
-            <div className="w-[7px] h-[7px] rounded-full bg-white"></div>
+            <div className="w-[6px] h-[6px] rounded-full bg-lightGrey"></div>
           </button>
           <label className="font-medium">1x 50kw</label>
         </div>

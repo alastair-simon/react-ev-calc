@@ -1,27 +1,34 @@
 /* || Input number styles */
 
-.number-wrap {
+.number-input {
+    width: 160px;
+    height: 60px;
     position: relative;
     display: flex;
     flex-direction: row;
+    border-radius: 12px;
+    justify-content: space-between;
     align-items: center;
+    padding-right: 18px;
+    padding-left: 18px;
+    background: #F2F2F2;
 }
 
 input[type="number"] {
-    width: 100%;
-    height: 50px;
-    font-size: 28px;
+    width: 55px;
+    height: 45px;
+    font-size: 1.4rem;
     font-weight: 500;
-    padding-left: 15px;
-    border: 2px solid #E2E2E2;
+    border: 1.5px solid #E2E2E2;
     border-radius: 10px;
     outline: none;
+    text-align: center;
+    letter-spacing: -1px;
     -moz-appearance: textfield;
     /* Firefox */
     -webkit-appearance: none;
     /* Chrome, Safari, Edge, Opera */
     appearance: textfield;
-    /* Future-proof */
 }
 
 input::selection {
@@ -41,19 +48,12 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 /* Button styles */
-
-.button-wrap {
-    position: absolute;
-    right: 20px;
-}
-
-.button-wrap button {
+.number-input button {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: -10px;
 }
 
-.button-wrap button :hover {
+.number-input button :hover {
     opacity: 0.7;
 }

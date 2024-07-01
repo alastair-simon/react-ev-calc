@@ -1,30 +1,55 @@
 import { SetStateAction } from "react";
-import { getBackgroundSize } from "../../utils/getBackgroundSize";
+import {useSlider} from "../../hooks/useSlider";
 import "./slider.css";
+
 interface propstype {
-    max: number;
-    value: number;
-    setValue: React.Dispatch<SetStateAction<number>>
+  max: number;
+  value: number;
+  setValue: React.Dispatch<SetStateAction<number>>;
+  unit: string;
+  label: string;
 }
 
-export default function Slider({ max, value, setValue }: propstype) {
+export default function Slider({ max, value, setValue, unit, label }:propstype) {
+  const {
+    sliderRef,
+    indicatorRef,
+    indicatorPosition,
+    handleChange,
+    sliderStyle,
+  } = useSlider({ max, value, setValue });
+
   return (
-    <div>
-      <h4 className="text-[34px] font-medium">
-        {value} <span className="text-[16px] font-medium">kWh</span>
-      </h4>
-      <input
-        type="range"
-        min="0"
-        max={max}
-        onChange={(e) => setValue(Number(e.target.value))}
-        style={getBackgroundSize(max, value)}
-        value={value}
-      />
-      <div className="flex flex-row justify-between text-[13px] mt-3">
-        <p className="font-medium">0 kWh</p>{" "}
-        <p className="font-medium">{max} kWh</p>
+    <div className="flex flex-col">
+      <div className="text-sm font-semibold flex flex-row justify-between mb-2">
+        <label>{label}</label>
+        <h4>
+          {max} {unit}
+        </h4>
+      </div>
+      <div className="relative">
+        <input
+          ref={sliderRef}
+          type="range"
+          min="0"
+          max={max}
+          onChange={handleChange}
+          style={sliderStyle}
+          value={value}
+          className="slider"
+        />
+        <div
+          ref={indicatorRef}
+          className="value-indicator mt-2"
+          style={{ left: `${indicatorPosition}px` }}
+        >
+          <div className="indicator-text w-12 h-7 -mr-6 font-medium flex justify-center items-center text-center rounded-md bg-black text-white">
+            <div className="arrUp"></div>
+            <p>{value}</p>
+          </div>
+        </div>
       </div>
     </div>
   );
-}
+};
+

@@ -22,6 +22,7 @@ export function useNumInput(
     setInputValue(newValue);
   };
 
+  // Handle enter
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       handleBlur(); // Call the handleBlur function on Enter key press
@@ -69,5 +70,12 @@ export function useNumInput(
     }
   };
 
-  return { handleInputChange, increment, decrement, inputValue, handleBlur, handleKeyDown };
+  return {
+    handleInputChange,
+    increment,
+    decrement,
+    inputValue,
+    handleBlur,
+    handleKeyDown,
+  };
 }

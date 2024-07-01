@@ -1,4 +1,4 @@
-interface BackgroundSizeObject {
+export interface BackgroundSizeObject {
   backgroundSize: string;
 }
 

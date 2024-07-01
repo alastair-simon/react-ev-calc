@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-// Custom hook for count up animation with ease-in-out effect
-export function useCountUpAnimation(initialValue:number, duration:number) {
+export function useCountUpAnimation(initialValue: number, duration: number) {
   const [currentValue, setCurrentValue] = useState(0);
   const frameDuration = 1000 / 60; // Duration for each frame (60 frames per second)
   const totalFrames = Math.round(duration / frameDuration); // Total frames needed for animation
