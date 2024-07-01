@@ -8,7 +8,7 @@
 ## Steps to get started
 
 -   Fork and clone this repo using `git clone https://github.com/alastair-simon/react-ev-calc.git`
--   `cd "Task 2"` to enter into the app folder
+-   `cd task_2` to enter into the app folder
 -   `npm install` to install all dependencies
 -   `npm run dev` to run the react app locally
 
