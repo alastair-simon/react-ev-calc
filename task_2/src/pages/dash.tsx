@@ -49,11 +49,11 @@ export default function Dash() {
           <div className="w-full h-full absolute opacity-0 md:opacity-100 top-0 left-0 -z-10 overflow-hidden">
             <img
               src={blurYellow}
-              className="w-[700px] md:-bottom-[100px] md:right-[300px] md:-mr-[200px] xl:-bottom-[50px] xl:right-[600px] xl:-mr-[200px] absolute"
+              className="w-[700px] md:-bottom-[100px] md:right-[300px] md:-mr-[200px] 2xl:-bottom-[50px] 2xl:right-[600px] absolute"
             ></img>
             <img
               src={blurGreen}
-              className="w-[700px] md:-bottom-[120px] md:-right-[80px] md:-mr-[140px] xl:-bottom-[30px] xl:right-[100px] absolute"
+              className="w-[700px] md:-bottom-[120px] md:-right-[80px] md:-mr-[140px] 2xl:-bottom-[30px] 2xl:right-[100px] absolute"
             ></img>
           </div>
         </div>
