@@ -30,7 +30,7 @@ export default function Results({ consumption, chargePointPower, chargePoints, p
   const { currentValue } = useCountUpAnimation(totalEnergyConsumed, 800);
 
   return (
-      <div className="w-full flex flex-col justify-center relative pt-8 pb-14 mt-20 ml-24 rounded-3xl bg-white md:w-[570px] md:h-[430px] md:p-20">
+      <div className="w-full flex flex-col justify-center relative pt-8 pb-14 mt-20 md:ml-24 rounded-3xl bg-white md:w-[570px] md:h-[430px] md:p-20">
         <div className="mb-4">
           <ToggleButton timePeriod={timePeriod} setTimePeriod={setTimePeriod} />
         </div>

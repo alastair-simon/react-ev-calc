@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState, SetStateAction } from "react";
 import { getBackgroundSize } from "../utils/getBackgroundSize";
 
@@ -29,7 +30,13 @@ export function useSlider ({ max, value, setValue }: UseSliderProps) {
         setIndicatorPosition(newPosition);
       }
     };
+
     updateIndicatorPosition();
+    window.addEventListener('resize', updateIndicatorPosition);
+
+    return () => {
+      window.removeEventListener('resize', updateIndicatorPosition);
+    };
   }, [value, max]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

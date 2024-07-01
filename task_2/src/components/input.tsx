@@ -24,7 +24,7 @@ export default function Input({
   setProbability,
 }: props) {
   return (
-    <div className="md:w-full h-full flex flex-col">
+    <div className="h-full flex flex-col md:pt-20 md:w-full xl:pt-30">
       <div className="mb-10 mt-10">
         <h2 className="font-PingFang font-semibold text-3xl mb-2">
           EV charge point calculator

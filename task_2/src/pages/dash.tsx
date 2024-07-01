@@ -15,13 +15,13 @@ export default function Dash() {
 
   return (
     <div className="w-full h-screen">
-      <nav className="w-full h-16 bg-lightGrey pl-20 pr-20 flex flex-row justify-between items-center">
+      <nav className="w-full fixed h-16 bg-lightGrey pl-10 pr-10 md:pl-20 md:pr-20 flex flex-row justify-between items-center z-10">
         <img src={logo} className="w-[80px]"></img>
         <IoMdMenu size={30} />
       </nav>
       <div
         id="wrapper"
-        className="w-full md:w-full flex flex-col items-center md:pt-5 md:flex-row md:justify-between md:items-start md:pl-20 "
+        className="w-full h-screen md:w-full flex flex-col items-center p-10 md:pr-0 md:pb-0 md:pt-0 md:flex-row md:justify-between md:items-start md:pl-20 "
       >
         <div id="left-side-wrap" className="w-full md:w-[500px] flex flex-col">
           <Input
@@ -36,21 +36,24 @@ export default function Dash() {
           />
         </div>
 
-        <div id="right-side-wrap" className="flex justify-center items-center relative flex-grow md:flex md:flex-col md:flex-grow md:justify-center md:items-center">
+        <div
+          id="right-side-wrap"
+          className="h-full flex justify-center items-center relative flex-grow md:full md:flex md:flex-col md:flex-grow md:justify-center md:items-center"
+        >
           <Results
             consumption={consumption}
             chargePointPower={chargePointPower}
             chargePoints={chargePoints}
             probability={probability}
           />
-          <div className="w-full h-[640px] absolute opacity-0 md:opacity-100 top-0 left-0 -z-10 overflow-hidden">
+          <div className="w-full h-full absolute opacity-0 md:opacity-100 top-0 left-0 -z-10 overflow-hidden">
             <img
               src={blurYellow}
-              className="w-[700px] -bottom-[100px] right-[300px] -mr-[200px] absolute"
+              className="w-[700px] md:-bottom-[100px] md:right-[300px] md:-mr-[200px] xl:-bottom-[50px] xl:right-[600px] xl:-mr-[200px] absolute"
             ></img>
             <img
               src={blurGreen}
-              className="w-[700px] -bottom-[130px] -right-[80px] -mr-[140px] absolute"
+              className="w-[700px] md:-bottom-[120px] md:-right-[80px] md:-mr-[140px] xl:-bottom-[30px] xl:right-[100px] absolute"
             ></img>
           </div>
         </div>
