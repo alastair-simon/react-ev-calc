@@ -57,7 +57,7 @@ export function useNumInput(
     const newValue = Math.min(value + 1, max);
     setInputValue(newValue.toString());
     setValue(newValue);
-    setError(newValue <= max);
+    setError(false);
   };
 
   // Decrement the number
