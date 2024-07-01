@@ -54,18 +54,25 @@ export function useNumInput(
 
   // Increment the number
   const increment = () => {
-    const newValue = Math.min(value + 1, max);
-    setInputValue(newValue.toString());
-    setValue(newValue);
-    setError(false);
+    const newValue = value + 1;
+    if (newValue <= max) {
+      setInputValue(newValue.toString());
+      setValue(newValue);
+      setError(false);
+    }
   };
 
   // Decrement the number
   const decrement = () => {
-    const newValue = Math.max(value - 1, min);
-    setInputValue(newValue.toString());
-    setValue(newValue);
-    setError(false);
+    const newValue = value - 1;
+    if (newValue >= min) {
+      setInputValue(newValue.toString());
+      setValue(newValue);
+      setError(false);
+    } else {
+      setInputValue(min.toString());
+      setValue(min);
+    }
   };
 
   return {
